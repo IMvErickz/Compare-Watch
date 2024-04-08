@@ -23,11 +23,11 @@ export const Header = () => {
           </div>
         </div>
       </div>
-      <div className="w-full flex gap-12 h-20 items-center justify-center">
+      <div className="w-full flex gap-12 h-20 items-center justify-end">
         <Link to="/" className="font-normal text-base text-green-oliver-100">
           Sobre
         </Link>
-        <div className="flex flex-row bg-green-oliver-110 w-full h-full">
+        <div className="flex flex-row bg-green-oliver-110 h-full">
           <Link
             to="/"
             className="flex flex-row items-center justify-center gap-3.5 font-normal text-base text-white bg-green-oliver-110 p-6"

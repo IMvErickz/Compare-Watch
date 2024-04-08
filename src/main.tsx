@@ -10,7 +10,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     <Theme>
       <main className="w-screen h-screen size-[100%] flex flex-col items-center justify-center">
         <Routes />
-        <Footer/>
+        <Footer />
       </main>
     </Theme>
   </React.StrictMode>
