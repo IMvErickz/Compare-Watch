@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { Theme } from "@radix-ui/themes";
 import { Routes } from "./router";
-import "./index.css";
+import "./global.css";
 import { Footer } from "./components/Footer";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
