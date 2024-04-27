@@ -19,6 +19,9 @@ export const theme = {
     },
   },
   extend: {
+    boxShadow: {
+      '3xl': '0 80px 60px -5px rgba(0, 0, 0, 0.3)',
+    },
     colors: {
       'green-oliver':{
         '300': '#293634',

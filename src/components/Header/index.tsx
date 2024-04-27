@@ -4,7 +4,7 @@ import personIcon from "../../assets/person-icon.svg";
 
 export const Header = () => {
   return (
-    <header className="w-full h-20 flex flex-row items-center justify-between">
+    <header className="w-full h-20 flex flex-row items-center justify-between shadow-3xl">
       <div className="w-full flex gap-12 h-20 items-center justify-center">
         <Link to="/" className="font-normal text-base text-green-oliver-100">
           Home
