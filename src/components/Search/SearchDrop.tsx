@@ -7,6 +7,35 @@ import {
 } from "@/components/ui/command"
 import { useFormContext } from "react-hook-form"
 import { searchData } from "../Home/SeactSection"
+import { useQuery } from "react-query"
+import { api } from "@/lib/axios"
+import { Link } from "react-router-dom"
+
+interface Brand {
+    id: string;
+    name: string;
+    description: string;
+}
+
+interface WatchResponseProps {
+    id: string;
+    name: string;
+    price: number;
+    description: string;
+    link: string;
+    boxMaterial: string;
+    boxSize: string;
+    braceletMaterial: string;
+    dialColor: string;
+    movimentType: string;
+    picture: string[];
+    releaseYear: number;
+    extras: string;
+    originCountry: string;
+    brandId: string;
+    createdAt: string;
+    Brand?: Brand;
+}
 
 export function SearchDrop() {
 
@@ -14,6 +43,16 @@ export function SearchDrop() {
 
     const searchDataInput = watch('data')
 
+    const { data } = useQuery({
+        queryKey: 'watches',
+        queryFn: async () => {
+            const response = await api.get<WatchResponseProps[]>('/watch')
+            return response
+        }
+    })
+
+    const filter = data?.data.filter(watch => watch.name.toLowerCase().includes(searchDataInput.toLowerCase())
+        || watch.Brand?.name.toLowerCase().includes(searchDataInput.toLowerCase()))
     return (
         <Command className={
             searchDataInput
@@ -24,14 +63,21 @@ export function SearchDrop() {
                 {...register('data')}
                 placeholder="Pesquisar"
             />
-            {searchDataInput && (
+            {filter && searchDataInput && (
                 <CommandList>
                     <CommandEmpty>Nada foi encontrado</CommandEmpty>
                     <CommandGroup className='text-2xl' heading="Sugestões">
                         <CommandList>
-                            <CommandItem>Watch</CommandItem>
-                            <CommandItem>Search Emoji</CommandItem>
-                            <CommandItem>Calculator</CommandItem>
+                            {filter.map(watch => {
+                                return (
+                                    <CommandItem key={watch.id} className="flex items-center justify-between" asChild>
+                                        <Link to='/compare'>
+                                            <span>{watch.Brand?.name}</span>
+                                            <span>{watch.name}</span>
+                                        </Link>
+                                    </CommandItem>
+                                )
+                            })}
                         </CommandList>
                     </CommandGroup>
                 </CommandList>
