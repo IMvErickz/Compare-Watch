@@ -7,6 +7,7 @@ import {
 } from "@/components/ui/command"
 import { formCompareData } from "@/pages/Compare"
 import { useFormContext, useFieldArray } from "react-hook-form"
+import { WatchTable } from "../Compare/Table"
 
 export function SearchDropMany() {
 
@@ -46,6 +47,8 @@ export function SearchDropMany() {
                     </Command>
                 )
             })}
+            <WatchTable />
+
         </>
     )
 }

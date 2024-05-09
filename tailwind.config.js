@@ -34,7 +34,9 @@ export const theme = {
         '100': '#F9F9F9',
         '200': '#E0E0E0',
         '500': '#C3C3C3',
-        '600':'#BABABA',
+        '600': '#BABABA',
+        '700': '#B1B1B1',
+        '900': '#606060'
         
       },
       border: "hsl(var(--border))",
