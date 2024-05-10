@@ -1,13 +1,5 @@
 import { Plus } from 'lucide-react'
-import { z } from 'zod'
 import { SearchDrop } from '../Search/SearchDrop'
-
-
-const searchSchema = z.object({
-    data: z.string(),
-})
-
-export type searchData = z.infer<typeof searchSchema>
 
 export function SearchSection() {
 

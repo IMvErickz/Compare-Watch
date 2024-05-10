@@ -6,10 +6,10 @@ import {
     CommandList,
 } from "@/components/ui/command"
 import { useFormContext } from "react-hook-form"
-import { searchData } from "../Home/SeactSection"
 import { useQuery } from "react-query"
 import { api } from "@/lib/axios"
 import { Link } from "react-router-dom"
+import { searchData } from "@/router"
 
 interface Brand {
     id: string;
@@ -51,8 +51,8 @@ export function SearchDrop() {
         }
     })
 
-    const filter = data?.data.filter(watch => watch.name.toLowerCase().includes(searchDataInput.toLowerCase())
-        || watch.Brand?.name.toLowerCase().includes(searchDataInput.toLowerCase()))
+    const filter = data?.data.filter(watch => searchDataInput && watch.name.toLowerCase().includes(searchDataInput.toLowerCase())
+        || searchDataInput && watch.Brand?.name.toLowerCase().includes(searchDataInput.toLowerCase()))
     return (
         <Command className={
             searchDataInput
@@ -71,7 +71,7 @@ export function SearchDrop() {
                             {filter.map(watch => {
                                 return (
                                     <CommandItem key={watch.id} className="flex items-center justify-between" asChild>
-                                        <Link to='/compare'>
+                                        <Link to={`/compare?first=${watch.id}`}>
                                             <span>{watch.Brand?.name}</span>
                                             <span>{watch.name}</span>
                                         </Link>
