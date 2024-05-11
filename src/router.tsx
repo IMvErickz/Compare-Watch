@@ -4,13 +4,31 @@ import {
   Routes as ReactDomRoutes,
 } from "react-router-dom";
 import { Home } from "./pages/Home";
+import { Compare } from "./pages/Compare";
+import { FormProvider, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+
+// eslint-disable-next-line react-refresh/only-export-components
+export const searchSchema = z.object({
+  data: z.string().optional(),
+  secondWatch: z.string().optional()
+})
+
+export type searchData = z.infer<typeof searchSchema>
 
 export function Routes() {
+  const methods = useForm<searchData>({
+    resolver: zodResolver(searchSchema)
+  })
   return (
-    <BrowserRouter>
-      <ReactDomRoutes>
-        <Route path="/" element={<Home />} />
-      </ReactDomRoutes>
-    </BrowserRouter>
+    <FormProvider {...methods}>
+      <BrowserRouter>
+        <ReactDomRoutes>
+          <Route path="/" element={<Home />} />
+          <Route path="/compare" element={<Compare />} />
+        </ReactDomRoutes>
+      </BrowserRouter>
+    </FormProvider>
   );
 }

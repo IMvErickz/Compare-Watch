@@ -4,14 +4,18 @@ import { Theme } from "@radix-ui/themes";
 import { Routes } from "./router";
 import "./global.css";
 import { Footer } from "./components/Footer";
+import { QueryClientProvider } from "react-query";
+import { queryClient } from "./lib/queryClient";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <Theme>
-      <main className="w-screen h-screen size-[100%] flex flex-col items-center justify-center">
-        <Routes />
-        <Footer />
-      </main>
-    </Theme>
+    <QueryClientProvider client={queryClient}>
+      <Theme>
+        <main className="w-screen h-screen size-[100%] flex flex-col items-center justify-center">
+          <Routes />
+          <Footer />
+        </main>
+      </Theme>
+    </QueryClientProvider>
   </React.StrictMode>
 );
