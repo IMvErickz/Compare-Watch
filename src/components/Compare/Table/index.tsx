@@ -44,7 +44,7 @@ export function WatchTable({
     movimentType,
     Brand }: WatchTableProps) {
     return (
-        <div className="flex flex-col items-center justify-center w-80">
+        <div className="flex flex-col items-center justify-center w-full">
             <div className="bg-green-oliver-110 w-full h-6 flex items-center justify-center font-l rounded-t-[4.2px]">
                 <h2 className="text-white text-sm">{name}</h2>
             </div>
