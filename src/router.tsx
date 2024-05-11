@@ -12,17 +12,14 @@ import { z } from "zod";
 // eslint-disable-next-line react-refresh/only-export-components
 export const searchSchema = z.object({
   data: z.string().optional(),
-  watches: z.array(z.string()).optional()
+  secondWatch: z.string().optional()
 })
 
 export type searchData = z.infer<typeof searchSchema>
 
 export function Routes() {
   const methods = useForm<searchData>({
-    resolver: zodResolver(searchSchema),
-    defaultValues: {
-      watches: ['asdasd']
-    }
+    resolver: zodResolver(searchSchema)
   })
   return (
     <FormProvider {...methods}>

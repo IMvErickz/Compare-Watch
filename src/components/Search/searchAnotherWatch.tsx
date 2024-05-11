@@ -8,14 +8,22 @@ import {
 import { useFormContext } from "react-hook-form"
 import { useQuery } from "react-query"
 import { api } from "@/lib/axios"
-import { Link } from "react-router-dom"
+import { useSearchParams } from "react-router-dom"
 import { searchData } from "@/router"
 
-export function SearchDrop() {
+export function SearchAnotherDrop() {
+
+    const [params, setSearchParams] = useSearchParams()
+
+    function handleChosseSecondWatch(id: string) {
+        params.set('second', id)
+        setSearchParams(params)
+
+    }
 
     const { watch, register } = useFormContext<searchData>()
 
-    const searchDataInput = watch('data')
+    const searchDataInput = watch('secondWatch')
 
     const { data } = useQuery({
         queryKey: 'watches',
@@ -34,7 +42,7 @@ export function SearchDrop() {
                 : `w-[520px] bg-white/70 rounded-3xl`}>
             <input
                 className="w-[520px] h-[3.25rem] outline-none border border-gray-compare-500 rounded-[40px] bg-gray-compare text-center placeholder:text-center placeholder:text-green-oliver-700 placeholder:text-xl"
-                {...register('data')}
+                {...register('secondWatch')}
                 placeholder="Pesquisar"
             />
             {filter && searchDataInput && (
@@ -45,10 +53,10 @@ export function SearchDrop() {
                             {filter.map(watch => {
                                 return (
                                     <CommandItem key={watch.id} className="flex items-center justify-between" asChild>
-                                        <Link to={`/compare?first=${watch.id}`}>
+                                        <button className="flex w-full items-center justify-between" onClick={() => handleChosseSecondWatch(watch.id)} >
                                             <span>{watch.Brand?.name}</span>
                                             <span>{watch.name}</span>
-                                        </Link>
+                                        </button>
                                     </CommandItem>
                                 )
                             })}
