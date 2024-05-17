@@ -53,7 +53,7 @@ export function WatchContainer({ watchId, watchSequel }: WatchContainerProps) {
   const properties = watchData && watchData.data;
 
   return (
-    <div className="flex flex-col flex-1 items-center justify-center gap-4">
+    <div className="flex flex-col flex-1 items-center justify-center gap-4 mb-8">
       <div>
         <Command
           className={

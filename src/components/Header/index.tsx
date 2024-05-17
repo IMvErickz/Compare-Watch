@@ -2,7 +2,15 @@ import { Link } from "react-router-dom";
 import CompareWatchIcon from "../../assets/compareWatch.svg";
 import personIcon from "../../assets/person-icon.svg";
 
+interface UserProps {
+  name: string,
+  email: string,
+}
+
 export const Header = () => {
+  const user = localStorage.getItem('user')
+  const parseUser: UserProps = JSON.parse(user ?? '')
+
   return (
     <header className="w-full h-20 flex flex-row items-center justify-between shadow-3xl">
       <div className="w-full flex gap-12 h-20 items-center justify-center">
@@ -27,15 +35,21 @@ export const Header = () => {
         <Link to="/" className="font-normal text-base text-green-oliver-100">
           Sobre
         </Link>
-        <div className="flex flex-row bg-green-oliver-110 h-full">
-          <Link
-            to="/signin"
-            className="flex flex-row items-center justify-center gap-3.5 font-normal text-base text-white bg-green-oliver-110 p-6"
-          >
-            Entrar
-            <img src={personIcon} alt="person icon" />
-          </Link>
-        </div>
+        {user ? (
+          <div className="pr-4">
+            <span className="text-green-oliver-110 font-bold text-xl">{parseUser.name}</span>
+          </div>) : (
+          <div className="flex flex-row bg-green-oliver-110 h-full">
+            <Link
+              to="/signin"
+              className="flex flex-row items-center justify-center gap-3.5 font-normal text-base text-white bg-green-oliver-110 p-6"
+            >
+              Entrar
+              <img src={personIcon} alt="person icon" />
+            </Link>
+          </div>
+        )}
+
       </div>
     </header>
   );
