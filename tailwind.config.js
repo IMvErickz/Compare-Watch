@@ -23,11 +23,11 @@ export const theme = {
       '3xl': '0 80px 60px -5px rgba(0, 0, 0, 0.3)',
     },
     colors: {
-      'green-oliver':{
-        '300': '#293634',
-        '200': '#465754',
-        '110': '#568279',
+      'green-oliver': {
         '100': '#5D6C69',
+        '110': '#568279',
+        '200': '#465754',
+        '300': '#293634',
         '700': '#2F4944'
       },
       'gray-compare': {
@@ -37,7 +37,7 @@ export const theme = {
         '600': '#BABABA',
         '700': '#B1B1B1',
         '900': '#606060'
-        
+
       },
       border: "hsl(var(--border))",
       input: "hsl(var(--input))",

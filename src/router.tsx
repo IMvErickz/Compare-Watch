@@ -9,6 +9,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Details } from "./pages/Details";
+import { Signup } from "./pages/Signup";
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const searchSchema = z.object({
@@ -26,6 +27,7 @@ export function Routes() {
     <FormProvider {...methods}>
       <BrowserRouter>
         <ReactDomRoutes>
+          <Route path="/signup" element={<Signup />} />
           <Route path="/" element={<Home />} />
           <Route path="/compare" element={<Compare />} />
           <Route path="/details">
