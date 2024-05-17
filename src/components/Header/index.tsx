@@ -29,7 +29,7 @@ export const Header = () => {
         </Link>
         <div className="flex flex-row bg-green-oliver-110 h-full">
           <Link
-            to="/signup"
+            to="/signin"
             className="flex flex-row items-center justify-center gap-3.5 font-normal text-base text-white bg-green-oliver-110 p-6"
           >
             Entrar
