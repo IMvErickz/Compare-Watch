@@ -38,7 +38,9 @@ export const theme = {
         '600': '#BABABA',
         '700': '#B1B1B1',
         '900': '#606060'
-
+      },
+      'compare-color': {
+        '100': 'rgb(201, 144, 41)'
       },
       border: "hsl(var(--border))",
       input: "hsl(var(--input))",

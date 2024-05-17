@@ -1,15 +1,16 @@
+import { zodResolver } from "@hookform/resolvers/zod";
+import { FormProvider, useForm } from "react-hook-form";
 import {
   BrowserRouter,
-  Route,
   Routes as ReactDomRoutes,
+  Route,
 } from "react-router-dom";
-import { Home } from "./pages/Home";
-import { Compare } from "./pages/Compare";
-import { FormProvider, useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { Compare } from "./pages/Compare";
 import { Details } from "./pages/Details";
-import { Signup } from "./pages/Signup";
+import { Home } from "./pages/Home";
+import { SignIn } from "./pages/SignIn";
+import { SignUp } from "./pages/Signup";
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const searchSchema = z.object({
@@ -27,7 +28,8 @@ export function Routes() {
     <FormProvider {...methods}>
       <BrowserRouter>
         <ReactDomRoutes>
-          <Route path="/signup" element={<Signup />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/signin" element={<SignIn />} />
           <Route path="/" element={<Home />} />
           <Route path="/compare" element={<Compare />} />
           <Route path="/details">
