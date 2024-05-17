@@ -9,7 +9,8 @@ export const content = [
 export const prefix = "";
 export const theme = {
   backgroundImage: {
-    'hero-pattern': "url('/src/assets/bg.svg')"
+    'hero-pattern': "url('/src/assets/bg.svg')",
+    'gradient': 'linear-gradient(to top right, #2F4944 22.4%, #5D6C69 69.51%)',
   },
   container: {
     center: true,
