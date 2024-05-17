@@ -32,19 +32,23 @@ export function MainDetails() {
             <div className="w-[59.5rem]">
               {properties && <WatchTable {...properties} />}
               <div className="w-full flex items-center justify-center gap-6 mt-4">
-                <Link
-                  target="_blank"
-                  to={`/details/${watchId}`}
-                  className="bg-green-oliver-105 hover:bg-green-oliver-110 transition-colors text-white hover text-base leading-5 flex items-center justify-center gap-2 w-32 p-2 rounded border border-solid border-white"
-                >
-                  Comprar
-                  <ShoppingBag color="#fff" />
+                {properties && (
+                  <>
+                    <Link
+                      target="_blank"
+                      to={properties?.link}
+                      className="bg-green-oliver-105 hover:bg-green-oliver-110 transition-colors text-white hover text-base leading-5 flex items-center justify-center gap-2 w-32 p-2 rounded border border-solid border-white"
+                    >
+                      Comprar
+                      <ShoppingBag color="#fff" />
 
-                </Link>
-                <Link to={''} className="bg-green-oliver-105 hover:bg-green-oliver-110 transition-colors text-white text-base leading-5 flex items-center justify-center gap-2 w-32 p-2 rounded border border-solid border-white">
-                  Comparar
-                  <Scale color="#fff" />
-                </Link>
+                    </Link>
+                    <Link to={`/compare?firstWatch=${watchId}`} className="bg-green-oliver-105 hover:bg-green-oliver-110 transition-colors text-white text-base leading-5 flex items-center justify-center gap-2 w-32 p-2 rounded border border-solid border-white">
+                      Comparar
+                      <Scale color="#fff" />
+                    </Link>
+                  </>
+                )}
               </div>
             </div>
           </div>
