@@ -6,7 +6,12 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
-import { useParams } from "react-router-dom";
+import { useUser } from "@/hooks/useUser";
+import { api } from "@/lib/axios";
+import { Heart } from "lucide-react";
+import { useMutation } from "react-query";
+import { useLocation, useParams } from "react-router-dom";
+import { toast } from "sonner";
 
 interface Brand {
     id: string;
@@ -36,10 +41,12 @@ interface WatchTableProps {
 
 
 export function WatchTable({
+    id,
     name,
     price,
     boxMaterial,
     boxSize,
+    picture,
     braceletMaterial,
     dialColor,
     movimentType,
@@ -47,8 +54,10 @@ export function WatchTable({
     originCountry,
     releaseYear,
     Brand }: WatchTableProps) {
-
+    const user = useUser()
     const param = useParams()
+    const location = useLocation()
+    const pathname = location.pathname.split('/')[1]
     const { watchId } = param
 
     function formatPrice(price: number) {
@@ -58,14 +67,63 @@ export function WatchTable({
         return priceFormated
     }
 
+    async function handleSetFavoriteWatch(watchId: string) {
+        await api.put('/fav', {
+            fav: watchId
+        })
+    }
+
+    async function handleDeleteFavoriteWatch(watchId: string) {
+        await api.delete(`/favs/delete/${watchId}`)
+    }
+
+    const findWatchId = user?.favs.find(fav => fav.id === id)
+
+    const { mutateAsync: setFavoriteFn } = useMutation({
+        mutationFn: findWatchId?.id ? handleDeleteFavoriteWatch : handleSetFavoriteWatch,
+        onMutate() {
+            const userFavorites = user?.favs
+            if (userFavorites) {
+                const favId = userFavorites.find(fav => fav.id === id)
+                if (favId) {
+                    const removeId = userFavorites.filter(fav => fav.id != id)
+                    const userData = { ...user, favs: removeId }
+                    localStorage.setItem('user', JSON.stringify(userData))
+                    toast.warning('Relógio removido dos favoritos')
+                } else {
+                    const userData = { ...user, favs: userFavorites && [...userFavorites, { id: id }] }
+                    localStorage.setItem('user', JSON.stringify(userData))
+                    toast.success('Relógio adicionado dos favoritos')
+                }
+            }
+        },
+    })
+
     return (
         <div className="flex flex-col items-center justify-center w-full">
+            {pathname != 'details' && (
+                <div className="flex items-start justify-center gap-2">
+                    <img src={picture[0]} alt="" className="w-52 h-56" />
+                    <button onClick={() => setFavoriteFn(id)}>
+                        {user?.favs.find(fav => fav.id === id)
+                            ?
+                            (
+                                <Heart className="size-4" fill="#6C6C6C" />
+                            )
+                            :
+                            (
+                                <Heart className="size-4" color="#6C6C6C" />
+                            )
+                        }
+                    </button>
+                </div>
+            )}
             {watchId ? (
-                <div className="bg-green-oliver-110 w-full h-max flex items-center justify-start font-l rounded-t-[4.2px]">
+                <div className="bg-green-oliver-110 w-full h-max flex items-center justify-start font-l rounded-t-[4.2px] mt-4">
                     <h2 className="text-white text-xl pl-4 leading-8">{name}</h2>
                 </div>
             ) : (
-                <div className="bg-green-oliver-110 w-full h-6 flex items-center justify-center font-l rounded-t-[4.2px]">
+                <div className="bg-green-oliver-110 w-full h-6 flex items-center justify-center font-l rounded-t-[4.2px] mt-4">
                     <h2 className="text-white text-sm">{name}</h2>
                 </div>
             )}

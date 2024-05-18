@@ -14,7 +14,7 @@ interface WatchContainerProps {
 }
 
 export function WatchContainer({ watchId, watchSequel }: WatchContainerProps) {
-  const [params, setSearchParams] = useSearchParams();
+  const [params, setSearchParams] = useSearchParams()
 
   const { watch, register } = useFormContext<searchData>();
 
@@ -87,9 +87,6 @@ export function WatchContainer({ watchId, watchSequel }: WatchContainerProps) {
             </SearchDrop.List>
           )}
         </Command>
-      </div>
-      <div>
-        <img src={properties?.picture[0]} alt="" className="w-52 h-56" />
       </div>
       {properties && <WatchTable {...properties} />}
       <div className="flex w-full items-center justify-between px-7">
