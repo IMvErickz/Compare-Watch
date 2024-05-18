@@ -1,15 +1,10 @@
 import { Link } from "react-router-dom";
 import CompareWatchIcon from "../../assets/compareWatch.svg";
 import personIcon from "../../assets/person-icon.svg";
-
-interface UserProps {
-  name: string,
-  email: string,
-}
+import { useUser } from "@/hooks/useUser";
 
 export const Header = () => {
-  const user = localStorage.getItem('user')
-  const parseUser: UserProps = JSON.parse(user ?? '')
+  const user = useUser()
 
   return (
     <header className="w-full h-20 flex flex-row items-center justify-between shadow-3xl">
@@ -37,7 +32,7 @@ export const Header = () => {
         </Link>
         {user ? (
           <div className="pr-4">
-            <span className="text-green-oliver-110 font-bold text-xl">{parseUser.name}</span>
+            <span className="text-green-oliver-110 font-bold text-xl">{user.name}</span>
           </div>) : (
           <div className="flex flex-row bg-green-oliver-110 h-full">
             <Link
