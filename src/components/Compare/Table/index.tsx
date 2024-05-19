@@ -10,7 +10,7 @@ import { useUser } from "@/hooks/useUser";
 import { api } from "@/lib/axios";
 import { Heart } from "lucide-react";
 import { useMutation } from "react-query";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useParams, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
 interface Brand {
@@ -57,6 +57,7 @@ export function WatchTable({
     const user = useUser()
     const param = useParams()
     const location = useLocation()
+    const navigate = useNavigate()
     const pathname = location.pathname.split('/')[1]
     const { watchId } = param
 
@@ -104,7 +105,7 @@ export function WatchTable({
             {pathname != 'details' && (
                 <div className="flex items-start justify-center gap-2">
                     <img src={picture[0]} alt="" className="w-52 h-56" />
-                    <button onClick={() => setFavoriteFn(id)}>
+                    <button onClick={() => { user ? setFavoriteFn(id) : navigate('/signin') }}>
                         {user?.favs.find(fav => fav.id === id)
                             ?
                             (
