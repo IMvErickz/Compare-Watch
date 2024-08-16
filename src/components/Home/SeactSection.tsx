@@ -70,7 +70,7 @@ export function SearchSection() {
         </div>
       </div>
       <span className="text-white text-lg leading-5">
-        Pesquise aqui seu relógio.{" "}
+        Pesquise aqui seu relógio{" "}
       </span>
     </div>
   );
